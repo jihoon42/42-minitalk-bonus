@@ -23,14 +23,14 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(SERVER): $(SERVER_OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(SERVER_OBJS) $(LIBFT) -o $(SERVER) 2>/dev/null
+	$(CC) $(CFLAGS) $(SERVER_OBJS) $(LIBFT) -o $(SERVER)
 
 $(CLIENT): $(CLIENT_OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(CLIENT_OBJS) $(LIBFT) -o $(CLIENT) 2>/dev/null
+	$(CC) $(CFLAGS) $(CLIENT_OBJS) $(LIBFT) -o $(CLIENT)
 
 bonus: $(SERVER_BOBJS) $(CLIENT_BOBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(SERVER_BOBJS) $(LIBFT) -o $(SERVER) 2>/dev/null
-	$(CC) $(CFLAGS) $(CLIENT_BOBJS) $(LIBFT) -o $(CLIENT) 2>/dev/null
+	$(CC) $(CFLAGS) $(SERVER_BOBJS) $(LIBFT) -o $(SERVER)
+	$(CC) $(CFLAGS) $(CLIENT_BOBJS) $(LIBFT) -o $(CLIENT)
 
 $(SERVER_OBJS) $(CLIENT_OBJS): minitalk.h
 $(SERVER_BOBJS) $(CLIENT_BOBJS): minitalk_bonus.h
