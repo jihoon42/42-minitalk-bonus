@@ -19,7 +19,7 @@
 typedef struct s_data
 {
 	int		bit;
-	char	c;
+	unsigned char	c;
 }				t_data;
 
 #endif
