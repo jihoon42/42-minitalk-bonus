@@ -6,7 +6,7 @@
 /*   By: jkim2 <jkim2@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 10:19:19 by jkim2             #+#    #+#             */
-/*   Updated: 2026/03/16 10:19:27 by jkim2            ###   ########.fr       */
+/*   Updated: 2026/03/20 12:09:38 by jkim2            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct s_data
 {
-	int		bit;
+	int				bit;
 	unsigned char	c;
 }				t_data;
 
