@@ -15,12 +15,14 @@
 
 static void	send_char(int pid, char c)
 {
-	int	bit;
+	unsigned char	uc;
+	int				bit;
 
+	uc = (unsigned char)c;
 	bit = 0;
 	while (bit < 8)
 	{
-		if (c & (1 << bit))
+		if (uc & (1 << bit))
 			kill(pid, SIGUSR2);
 		else
 			kill(pid, SIGUSR1);
