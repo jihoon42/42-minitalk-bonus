@@ -15,30 +15,37 @@
 
 t_data	g_data;
 
+static void	flush_char(void)
+{
+	if (g_data.c == '\0')
+	{
+		write(1, "\n", 1);
+		kill(g_data.pid, SIGUSR2);
+		g_data.pid = 0;
+	}
+	else
+	{
+		write(1, &g_data.c, 1);
+		kill(g_data.pid, SIGUSR1);
+	}
+	g_data.bit = 0;
+	g_data.c = 0;
+}
+
 static void	handle_signal(int sig, siginfo_t *info, void *context)
 {
 	(void)context;
-	if (!g_data.pid)
+	if (!g_data.pid || g_data.pid != info->si_pid)
+	{
 		g_data.pid = info->si_pid;
+		g_data.bit = 0;
+		g_data.c = 0;
+	}
 	if (sig == SIGUSR2)
 		g_data.c |= (1 << g_data.bit);
 	g_data.bit++;
 	if (g_data.bit == 8)
-	{
-		if (g_data.c == '\0')
-		{
-			write(1, "\n", 1);
-			kill(g_data.pid, SIGUSR2);
-			g_data.pid = 0;
-		}
-		else
-		{
-			write(1, &g_data.c, 1);
-			kill(g_data.pid, SIGUSR1);
-		}
-		g_data.bit = 0;
-		g_data.c = 0;
-	}
+		flush_char();
 }
 
 int	main(void)
