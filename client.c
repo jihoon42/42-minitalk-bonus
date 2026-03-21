@@ -16,16 +16,24 @@
 
 static int	is_valid_pid(char *str)
 {
+	int	value;
 	int	i;
 
+	value = 0;
 	i = 0;
+	if (!str[0])
+		return (0);
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
 			return (0);
+		if (value > 214748364 || (value == 214748364
+				&& str[i] > '7'))
+			return (0);
+		value = value * 10 + (str[i] - '0');
 		i++;
 	}
-	if (i == 0 || ft_atoi(str) <= 0)
+	if (value <= 0)
 		return (0);
 	return (1);
 }
