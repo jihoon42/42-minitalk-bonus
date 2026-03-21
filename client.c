@@ -12,20 +12,42 @@
 
 #include "minitalk.h"
 #include "libft/libft.h"
+#include <stdlib.h>
+
+static int	is_valid_pid(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	if (i == 0 || ft_atoi(str) <= 0)
+		return (0);
+	return (1);
+}
 
 static void	send_char(int pid, char c)
 {
 	unsigned char	uc;
 	int				bit;
+	int				sig;
 
 	uc = (unsigned char)c;
 	bit = 0;
 	while (bit < 8)
 	{
+		sig = SIGUSR1;
 		if (uc & (1 << bit))
-			kill(pid, SIGUSR2);
-		else
-			kill(pid, SIGUSR1);
+			sig = SIGUSR2;
+		if (kill(pid, sig) == -1)
+		{
+			write(2, "Error: send failed\n", 19);
+			exit(1);
+		}
 		usleep(500);
 		bit++;
 	}
@@ -41,12 +63,12 @@ int	main(int argc, char **argv)
 		write(2, "Usage: ./client <PID> <message>\n", 32);
 		return (1);
 	}
-	pid = ft_atoi(argv[1]);
-	if (pid <= 0)
+	if (!is_valid_pid(argv[1]))
 	{
 		write(2, "Error: invalid PID\n", 19);
 		return (1);
 	}
+	pid = ft_atoi(argv[1]);
 	i = 0;
 	while (argv[2][i])
 	{
