@@ -1,10 +1,11 @@
 .DS_Store
 
 *.o
+*.a
 .bonus
 server
 client
 server_bonus
 client_bonus
 
-*.a
+minitalk-Tester/
