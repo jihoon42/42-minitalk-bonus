@@ -28,9 +28,12 @@ $(SERVER): $(SERVER_OBJS) $(LIBFT)
 $(CLIENT): $(CLIENT_OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(CLIENT_OBJS) $(LIBFT) -o $(CLIENT) 2>/dev/null
 
-bonus: $(SERVER_BOBJS) $(CLIENT_BOBJS) $(LIBFT)
+bonus: .bonus
+
+.bonus: $(SERVER_BOBJS) $(CLIENT_BOBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(SERVER_BOBJS) $(LIBFT) -o $(SERVER) 2>/dev/null
 	$(CC) $(CFLAGS) $(CLIENT_BOBJS) $(LIBFT) -o $(CLIENT) 2>/dev/null
+	touch .bonus
 
 $(SERVER_OBJS) $(CLIENT_OBJS): minitalk.h
 $(SERVER_BOBJS) $(CLIENT_BOBJS): minitalk_bonus.h
@@ -40,7 +43,7 @@ $(SERVER_BOBJS) $(CLIENT_BOBJS): minitalk_bonus.h
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
-	rm -f $(SERVER_OBJS) $(CLIENT_OBJS) $(SERVER_BOBJS) $(CLIENT_BOBJS)
+	rm -f $(SERVER_OBJS) $(CLIENT_OBJS) $(SERVER_BOBJS) $(CLIENT_BOBJS) .bonus
 
 fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
