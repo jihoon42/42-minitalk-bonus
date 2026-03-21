@@ -1,0 +1,10 @@
+.DS_Store
+
+*.o
+.bonus
+server
+client
+server_bonus
+client_bonus
+
+*.a
